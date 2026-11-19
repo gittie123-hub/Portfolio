@@ -1,54 +1,33 @@
-
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { FiDownload } from "react-icons/fi";
-// components
-import Social from "@/components/Social";
 import Photo from "@/components/Photo";
-import Stats from "@/components/Stats";
+import Social from "@/components/Social";
 
-const Home = () => {
+export default function Home() {
   return (
-    <section className="h-full">
-      <div className="container mx-auto h-full">
-        <div className="flex flex-col xl:flex:row items-center justify-between xl:pt-8 xl:pb-24">
-          {/* text */}
-          <div className="text-center xl:text-left order-2 xl:order-none">
-            <span className="text-xl">Software Developer</span>
-            <h1 className="h1">
-              Hello I'm <br /> <span className="text-accent">Seeram Sainath</span>
-            </h1>
-            <p className="max-w-[500px] mb-9 text-white/80">
-                I adept at developing elegant web applications and I am skilled in various programming technologies.
-            </p>
-            { /* btn and socials */}
-          <div className="flex flex-col xl:flex-row items-center gap-8">
-            <Button 
-            variant="outline"
-            size="lg"
-            className="uppercase flex items-center gap-2"
-            >
-              <span>Download CV</span>
-              <FiDownload className="text-xl" />
+    <main className="container mx-auto pb-12">
+      <div className="flex flex-col items-center justify-between gap-8 xl:flex-row xl:py-8">
+        <div className="order-2 text-center xl:order-none xl:text-left">
+          <p className="mb-3 text-xl">Java Full Stack Developer</p>
+          <h1 className="h1 text-accent">Sainath Seeram</h1>
+          <p className="mx-auto mb-8 mt-5 max-w-[540px] text-white/80 xl:mx-0">
+            I build Spring Boot APIs and Angular and React interfaces for banking,
+            financial services, and internal enterprise tools.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-5 xl:justify-start">
+            <Button asChild variant="outline" size="lg">
+              <Link href="/work">View selected work</Link>
             </Button>
-            <div className="mb-8 xl:mb-0">
-              <Social containerStyles="flex gap-6" 
-              iconStyles="w-9 h-9 border border-accent rounded-full flex justify-center items-center text-accent text-base hover:bg-accent hover:text-primary hover:transition-all duration-500"/>
-            </div>
+            <Social
+              containerStyles="flex"
+              iconStyles="flex h-9 w-9 items-center justify-center rounded-full border border-accent text-accent hover:bg-accent hover:text-primary"
+            />
           </div>
-          </div>
-          {/* photo */}
-          <div className="order-1 xl:order-none mb-8 xl:mb-0">
-            <Photo />
-          </div>
-
         </div>
-
+        <div className="order-1 xl:order-none">
+          <Photo />
+        </div>
       </div>
-      <Stats />
-    </section>
-    
+    </main>
   );
-  
-};
-
-export default Home
+}

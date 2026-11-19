@@ -2,48 +2,23 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { portfolioLinks } from "./portfolioLinks";
 
-const links = [
-  {
-    name : "home",
-    path : "/",
-  },
-  {
-    name : "services",
-    path : "/services",
-  },
-  {
-    name : "resume",
-    path : "/resume",
-  },
-  {
-    name : "work",
-    path : "/work",
-  },
-  {
-    name : "contact",
-    path : "/contact",
-  },
-]
-
-const Nav = () => {
+export default function Nav() {
   const pathname = usePathname();
 
   return (
-    <nav className="flex gap-8"> 
-      {links.map((link, index) => {
-        return (
-        <Link 
-          href={link.path}
-          key={index} 
-          className={'${link.path === pathname && "text-accent border-b-2 border-accent"}capitalize font-medium hover:text-accent transition-all'}>{link.name}
-            
-            
+    <nav aria-label="Main navigation" className="flex gap-8">
+      {portfolioLinks.map(({ name, path }) => (
+        <Link
+          key={path}
+          href={path}
+          aria-current={path === pathname ? "page" : undefined}
+          className="font-medium transition-colors hover:text-accent aria-[current=page]:border-b-2 aria-[current=page]:border-accent aria-[current=page]:text-accent"
+        >
+          {name}
         </Link>
-        )
-    })}
-  </nav>
-  )
+      ))}
+    </nav>
+  );
 }
-
-export default Nav;

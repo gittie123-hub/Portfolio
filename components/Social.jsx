@@ -1,38 +1,11 @@
-import Link from "next/link";
+import { FaGithub } from "react-icons/fa";
 
-import { FaGithub, FaLinkedin, FaTwitter, FaInstagram } from "react-icons/fa";
-
-const socials = [
-    {
-      icon: <FaGithub />,
-      path: "",
-    },
-    {
-      icon: <FaLinkedin />,
-      path: "",
-    },
-    {
-      icon: <FaTwitter />,
-      path: "",
-    },
-    {
-      icon: <FaInstagram />,
-      path: "",
-    },
-  ];
-
-const Social = ({containerStyles, iconStyles}) => {
-    return (
-      <div className={containerStyles}>
-      {socials.map((item, index) => {
-      return ( 
-        <Link key={index} href={item.path} className={iconStyles}>
-            {item.icon}
-        </Link>
-      );
-      })}
-     </div>
-    );
-};  
-
-export default Social;
+export default function Social({ containerStyles, iconStyles }) {
+  return (
+    <div className={containerStyles}>
+      <a href="https://github.com/gittie123-hub" className={iconStyles} aria-label="GitHub profile">
+        <FaGithub aria-hidden="true" />
+      </a>
+    </div>
+  );
+}
