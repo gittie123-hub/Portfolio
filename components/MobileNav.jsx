@@ -1,59 +1,35 @@
-"use client"
-import { Sheet,SheetContent,sheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { usePathname } from "next/navigation";
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { CiMenuFries } from "react-icons/ci";
+import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { portfolioLinks } from "./portfolioLinks";
 
-const links = [
-    {
-        name : 'home',
-        path : '/',
-    },
-    {
-        name : 'services',
-        path : '/services',
-    },
-    {
-        name : 'resume',
-        path : '/resume',
-    },
-    {
-        name : 'work',
-        path : '/work',
-    },
-    {
-        name : 'contact',
-        path : '/contact',
-    },
-];
+export default function MobileNav() {
+  const pathname = usePathname();
 
-const MobileNav = () => {
-    const pathname = usePathname();
-    return (
-      <Sheet>
-        <SheetTrigger className="flex justify-center items-center">
-        <CiMenuFries className="text-[32px] text-accent" />
-        </SheetTrigger>
-        <SheetContent className="flex flex-col">
-          {/* logo */}
-          <div className="mt-32 mb-40 text-center text-2xl"></div>
-          {/* nav */}
-          <nav className="flex flex-col justify-center items-center gap-8">
-          {links.map((link, index) => (
-            <Link
-              href={link.path}
-              key={index}
-              className={`${link.path === pathname && "text-accent border-b-2 border-accent"} text-xl capitalize hover:text-accent transition-all`}
-              
-            >
-              {link.name}
-            </Link>
+  return (
+    <Sheet>
+      <SheetTrigger aria-label="Open navigation" className="flex items-center justify-center">
+        <CiMenuFries aria-hidden="true" className="text-[32px] text-accent" />
+      </SheetTrigger>
+      <SheetContent aria-describedby={undefined} className="flex flex-col">
+        <SheetTitle className="sr-only">Main navigation</SheetTitle>
+        <nav aria-label="Main navigation" className="mt-24 flex flex-col items-center gap-8">
+          {portfolioLinks.map(({ name, path }) => (
+            <SheetClose asChild key={path}>
+              <Link
+                href={path}
+                aria-current={path === pathname ? "page" : undefined}
+                className="text-xl transition-colors hover:text-accent aria-[current=page]:border-b-2 aria-[current=page]:border-accent aria-[current=page]:text-accent"
+              >
+                {name}
+              </Link>
+            </SheetClose>
           ))}
-          </nav>
-        </SheetContent>
-     </Sheet>
-    );
-  
-};
-
-export default MobileNav;
+        </nav>
+      </SheetContent>
+    </Sheet>
+  );
+}
